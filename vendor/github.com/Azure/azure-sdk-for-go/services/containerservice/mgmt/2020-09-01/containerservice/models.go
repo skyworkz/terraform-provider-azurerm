@@ -1540,6 +1540,8 @@ type ManagedClusterAPIServerAccessProfile struct {
 	AuthorizedIPRanges *[]string `json:"authorizedIPRanges,omitempty"`
 	// EnablePrivateCluster - Whether to create the cluster as a private cluster or not.
 	EnablePrivateCluster *bool `json:"enablePrivateCluster,omitempty"`
+	// PrivateDNSZone - Private DNS zone into which to place the cluster.
+	PrivateDNSZone *string `json:"privateDNSZone,omitempty"`
 }
 
 // ManagedClusterIdentity identity for the managed cluster.
