@@ -22,7 +22,7 @@ tools:
 	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH || $$GOPATH)/bin v1.32.0
 
 build: fmtcheck generate
-	go install
+	go install -ldflags "-linkmode external -extldflags -static"
 
 build-docker:
 	mkdir -p bin
