@@ -437,6 +437,13 @@ func resourceArmKubernetesCluster() *schema.Resource {
 				ConflictsWith: []string{"private_link_enabled"},
 			},
 
+			"private_dns_zone": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+				Computed: true,
+			},
+
 			"role_based_access_control": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -734,9 +741,12 @@ func resourceArmKubernetesClusterCreate(d *schema.ResourceData, meta interface{}
 		enablePrivateCluster = v.(bool)
 	}
 
+	privateDNSZone := d.Get("private_dns_zone").(string)
+
 	apiAccessProfile := containerservice.ManagedClusterAPIServerAccessProfile{
 		EnablePrivateCluster: &enablePrivateCluster,
 		AuthorizedIPRanges:   apiServerAuthorizedIPRanges,
+		PrivateDNSZone:       &privateDNSZone,
 	}
 
 	nodeResourceGroup := d.Get("node_resource_group").(string)
